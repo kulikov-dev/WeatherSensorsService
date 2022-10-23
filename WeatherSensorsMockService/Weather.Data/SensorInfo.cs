@@ -1,4 +1,4 @@
-﻿namespace Weather.BL
+﻿namespace Weather.Data
 {
     /// <summary>
     /// Sensor info

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Weather.BL
+namespace Weather.Data
 {
     /// <summary>
     /// Interface for sensors storage

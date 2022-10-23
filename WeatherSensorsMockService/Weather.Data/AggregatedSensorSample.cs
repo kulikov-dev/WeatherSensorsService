@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Weather.BL
+namespace Weather.Data
 {
     /// <summary>
     /// Aggregated sample for specific period

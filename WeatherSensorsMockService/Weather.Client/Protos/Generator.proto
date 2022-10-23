@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package KulikovDev.WeatherEmulator;
+
+option csharp_namespace = "KulikovDev.WeatherEmulator";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service Generator{
+  rpc EventStream(google.protobuf.Empty) returns (stream EventResponse);
+  rpc EventStreamDuplex(stream EventStreamDuplexRequest) returns (stream EventResponse);
+  rpc GetSensors(GetSensorsRequest) returns (GetSensorsResponse);
+}
+
+message EventStreamDuplexRequest
+{
+}
+
+message EventResponse
+{
+  int64 event_id = 1;
+  string name = 2;
+  SensorInfo sensor_info = 3;
+
+  double temperature = 4;
+  double humidity = 5;
+  double co2 = 6;
+
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message GetSensorsRequest {}
+
+message GetSensorsResponse{
+    repeated SensorInfo result =1 ;
+}
+
+message SensorInfo{
+    int64 id = 1;
+    string name = 2;
+    
+    SensorTypeEnum sensor_type = 3;
+}
+
+enum SensorTypeEnum{
+    INSIDE = 0;
+    OUTSIDE = 1;
+}

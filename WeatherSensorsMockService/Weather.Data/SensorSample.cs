@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Weather.BL
+namespace Weather.Data
 {
     /// <summary>
     /// Sample information
