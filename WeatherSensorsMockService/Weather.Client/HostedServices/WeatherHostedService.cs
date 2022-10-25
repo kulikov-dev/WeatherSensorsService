@@ -1,5 +1,4 @@
 ﻿using Google.Protobuf.WellKnownTypes;
-using KulikovDev.WeatherEmulator;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -47,7 +46,7 @@ namespace Weather.Client.HostedServices
         /// <summary>
         /// GRPC client
         /// </summary>
-        private Generator.GeneratorClient client;
+        private Emulator.Generator.GeneratorClient client;
 
         /// <summary>
         /// Cancellation token
@@ -87,12 +86,12 @@ namespace Weather.Client.HostedServices
         /// Get a GRPC client
         /// </summary>
         /// <returns> GRPC client </returns>
-        private async Task<Generator.GeneratorClient> GetClient()
+        private async Task<Emulator.Generator.GeneratorClient> GetClient()
         {
             if (client == null)
             {
                 await using var scope = _provider.CreateAsyncScope();
-                client = scope.ServiceProvider.GetRequiredService<Generator.GeneratorClient>();
+                client = scope.ServiceProvider.GetRequiredService<Emulator.Generator.GeneratorClient>();
             }
 
             return client;

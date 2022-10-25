@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Client", "Weather.Client\Weather.Client.csproj", "{63063294-F324-4CE7-99BD-C2C923475CE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Emulator", "Weather.Emulator\Weather.Emulator.csproj", "{845D13D6-19B3-4D77-B3B1-1F935407E9DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{121C56BC-D44D-4514-A7E8-F836E6D5CFEA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Data", "Weather.Data\Weather.Data.csproj", "{B5F4072A-5376-4B7D-9404-87683573E060}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63063294-F324-4CE7-99BD-C2C923475CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63063294-F324-4CE7-99BD-C2C923475CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63063294-F324-4CE7-99BD-C2C923475CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63063294-F324-4CE7-99BD-C2C923475CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{845D13D6-19B3-4D77-B3B1-1F935407E9DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{845D13D6-19B3-4D77-B3B1-1F935407E9DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{845D13D6-19B3-4D77-B3B1-1F935407E9DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{845D13D6-19B3-4D77-B3B1-1F935407E9DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F4072A-5376-4B7D-9404-87683573E060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F4072A-5376-4B7D-9404-87683573E060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F4072A-5376-4B7D-9404-87683573E060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F4072A-5376-4B7D-9404-87683573E060}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63063294-F324-4CE7-99BD-C2C923475CE8} = {121C56BC-D44D-4514-A7E8-F836E6D5CFEA}
+		{845D13D6-19B3-4D77-B3B1-1F935407E9DD} = {121C56BC-D44D-4514-A7E8-F836E6D5CFEA}
+		{B5F4072A-5376-4B7D-9404-87683573E060} = {121C56BC-D44D-4514-A7E8-F836E6D5CFEA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED310916-47EF-49E6-9FD3-56F57D6DB9FB}
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,4 @@
-﻿using KulikovDev.WeatherEmulator;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -28,7 +26,7 @@ namespace Weather.Client.Controllers
         /// <summary>
         /// GRPC client
         /// </summary>
-        private readonly Generator.GeneratorClient _generatorClient;
+        private readonly Emulator.Generator.GeneratorClient _generatorClient;
 
         /// <summary>
         /// Constructor with parameters
@@ -36,7 +34,7 @@ namespace Weather.Client.Controllers
         /// <param name="storage"> Sensors storage </param>
         /// <param name="generatorClient"> GRPC client </param>
         /// <param name="subscriptions"> Sensors subscription storage </param>
-        public SensorsController(ISensorsStorage storage, Generator.GeneratorClient generatorClient, ISubscriptionStorage subscriptions)
+        public SensorsController(ISensorsStorage storage, Emulator.Generator.GeneratorClient generatorClient, ISubscriptionStorage subscriptions)
         {
             _storage = storage;
             _generatorClient = generatorClient;
@@ -57,7 +55,7 @@ namespace Weather.Client.Controllers
                 return Ok();
             }
 
-            var request = new GetSensorsRequest();
+            var request = new Emulator.GetSensorsRequest();
             var events = await _generatorClient.GetSensorsAsync(request);
             var contains = false;
 
@@ -88,7 +86,7 @@ namespace Weather.Client.Controllers
         [HttpGet("subscribe")]
         public async Task<ActionResult> SubscribeAll()
         {
-            var request = new GetSensorsRequest();
+            var request = new Emulator.GetSensorsRequest();
             var events = await _generatorClient.GetSensorsAsync(request);
 
             foreach (var item in events.Result)

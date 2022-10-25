@@ -20,7 +20,7 @@ namespace Weather.Client.Helpers
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddLocalGrpcClient<KulikovDev.WeatherEmulator.Generator.GeneratorClient, WeatherGrpcConfig>(configuration);
+            services.AddLocalGrpcClient<Weather.Emulator.Generator.GeneratorClient, WeatherGrpcConfig>(configuration);
         }
 
         /// <summary>
