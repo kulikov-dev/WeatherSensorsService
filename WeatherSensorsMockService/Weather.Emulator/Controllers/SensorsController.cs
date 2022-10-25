@@ -12,7 +12,7 @@ namespace Weather.Emulator.Controllers
     /// Sensors controller
     /// </summary>
     [Route("sensors")]
-    public class SensorsController : ControllerBase
+    public sealed class SensorsController : ControllerBase
     {
         /// <summary>
         /// List of available sensors
@@ -36,27 +36,31 @@ namespace Weather.Emulator.Controllers
         [HttpGet]
         public async Task<ActionResult<List<EventResponse>>> GetSensorsInfo()
         {
-            var rand = new Random(1042);
             var list = new List<EventResponse>(_sensors.Count);
 
-            for (int i = 0; i < _sensors.Count; i++)
+            await Task.Factory.StartNew(() =>
             {
-                Data.SensorInfo item = _sensors[i];
+                var rand = new Random(1042);
 
-                WeatherMock.Generate(ref item);
-
-                var itemResponse = new EventResponse()
+                for (int i = 0; i < _sensors.Count; i++)
                 {
-                    EventId = rand.Next(10000),
-                    SensorInfo = new SensorInfo() { Id = item.Id, Name = item.Name, SensorType = (SensorTypeEnum)(int)item.SensorType },
-                    Temperature = item.Temperature,
-                    Humidity = item.Humidity,
-                    Co2 = item.CO2,
-                    CreatedAt = Timestamp.FromDateTime(DateTime.UtcNow)
-                };
+                    Data.SensorInfo item = _sensors[i];
 
-                list.Add(itemResponse);
-            }
+                    WeatherMock.Generate(ref item);
+
+                    var itemResponse = new EventResponse()
+                    {
+                        EventId = rand.Next(10000),
+                        SensorInfo = new SensorInfo() { Id = item.Id, Name = item.Name, SensorType = (SensorTypeEnum)(int)item.SensorType },
+                        Temperature = item.Temperature,
+                        Humidity = item.Humidity,
+                        Co2 = item.CO2,
+                        CreatedAt = Timestamp.FromDateTime(DateTime.UtcNow)
+                    };
+
+                    list.Add(itemResponse);
+                }
+            });
 
             return Ok(list);
         }

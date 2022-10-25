@@ -5,15 +5,15 @@ using System.Linq;
 namespace Weather.Data
 {
     /// <summary>
-    /// Aggregated sample for specific period
+    /// Aggregated sample for the specific period
     /// </summary>
-    public class AggregatedSensorSample
+    public sealed class AggregatedSensorSample
     {
         /// <summary>
         /// Start aggregation date
         /// </summary>
-        /// <remarks> Aggregated from this date for next N minutes </remarks>
-        public DateTime AggregationTime { get; set; }
+        /// <remarks> Aggregates data from this date for next N minutes </remarks>
+        public DateTime AggregationDate { get; set; }
 
         /// <summary>
         /// Average temperature
@@ -38,21 +38,21 @@ namespace Weather.Data
         /// <summary>
         /// Constructor with parameters
         /// </summary>
-        /// <param name="aggregationTime"> Start aggregation date </param>
+        /// <param name="aggregationDate"> Start aggregation date </param>
         /// <param name="items"> List of items to aggregate </param>
-        public AggregatedSensorSample(DateTime aggregationTime, List<SensorSample> items)
+        public AggregatedSensorSample(DateTime aggregationDate, List<SensorSample> items)
         {
-            AggregationTime = aggregationTime;
+            AggregationDate = aggregationDate;
+            AverageTemperature = 0;
+            AverageHumidity = 0;
 
             if (items == null || !items.Any())
             {
-                AverageTemperature = AverageHumidity = MinCO2 = MaxCO2 = 0;
+                MinCO2 = MaxCO2 = 0;
 
                 return;
             }
 
-            AverageTemperature = 0;
-            AverageHumidity = 0;
             MinCO2 = int.MaxValue;
             MaxCO2 = int.MinValue;
 

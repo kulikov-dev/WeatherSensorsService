@@ -42,7 +42,7 @@ namespace Weather.Client.Helpers
                 }
                 catch (Exception exception)
                 {
-                    logger.LogError(exception, "No connection with a GRPC service. Reconnection...");
+                    logger.LogError(exception, "No connection with a GRPC service. Trying to reconnect...");
                     System.Threading.Thread.Sleep(retryDelay * 1000);
                 }
             }

@@ -26,16 +26,16 @@ namespace Weather.Data
         /// </summary>
         /// <param name="sensorId"> Sensor identifier </param>
         /// <returns> List of aggregated samples </returns>
-        List<AggregatedSensorSample> GetAverageLogBySensor(long sensorId);
+        List<AggregatedSensorSample> GetAggregatedLogBySensor(long sensorId);
 
         /// <summary>
         /// Get aggregated samples by sensor id for specified period
         /// </summary>
         /// <param name="sensorId"> Sensor identifier </param>
         /// <param name="startDate"> Start date </param>
-        /// <param name="duration"> Duration in minutes </param>
+        /// <param name="duration"> Duration (minutes) </param>
         /// <returns> List of aggregated samples </returns>
-        AggregatedSensorSample GetAverageLogBySensor(long sensorId, DateTime startDate, int duration);
+        AggregatedSensorSample GetAggregatedLogBySensor(long sensorId, DateTime startDate, int duration);
 
         /// <summary>
         /// Add new sample to the storage

@@ -5,9 +5,9 @@ using System.Linq;
 namespace Weather.Data
 {
     /// <summary>
-    /// Sensor samples
+    /// Sensor samples log
     /// </summary>
-    public class SensorLog
+    public sealed class SensorLog
     {
         /// <summary>
         /// List of all samples
@@ -17,7 +17,7 @@ namespace Weather.Data
         /// <summary>
         /// List of aggregated samples
         /// </summary>
-        private readonly Dictionary<DateTime, AggregatedSensorSample> _aggregationLog = new();
+        private readonly Dictionary<DateTime, AggregatedSensorSample> _aggregatedLog = new();
 
         /// <summary>
         /// Temp storage for items next for aggregation
@@ -25,7 +25,7 @@ namespace Weather.Data
         private readonly List<SensorSample> _itemsToAggregate = new();
 
         /// <summary>
-        /// Last aggregatin date
+        /// Last aggregation date
         /// </summary>
         private DateTime aggregationTime = DateTime.MinValue;
 
@@ -52,7 +52,7 @@ namespace Weather.Data
             _log.Add(@info);
             if (info.CreatedAt > aggregationTime.AddMinutes(aggregationDuration))
             {
-                _aggregationLog.Add(aggregationTime, new AggregatedSensorSample(aggregationTime, _itemsToAggregate));
+                _aggregatedLog.Add(aggregationTime, new AggregatedSensorSample(aggregationTime, _itemsToAggregate));
                 _itemsToAggregate.Clear();
 
                 aggregationTime = new DateTime(info.CreatedAt.Year, info.CreatedAt.Month, info.CreatedAt.Day, info.CreatedAt.Hour, info.CreatedAt.Minute, 0);
@@ -76,19 +76,19 @@ namespace Weather.Data
         /// <returns> List of aggregated samples </returns>
         public List<AggregatedSensorSample> GetAverageLog()
         {
-            return _aggregationLog.Values.ToList();
+            return _aggregatedLog.Values.ToList();
         }
 
         /// <summary>
         /// Get aggregated samples for specified period
         /// </summary>
         /// <param name="startDate"> Start date </param>
-        /// <param name="duration"> Duration in minutes </param>
+        /// <param name="duration"> Duration (minutes) </param>
         /// <returns> List of aggregated samples </returns>
         public AggregatedSensorSample GetAverageLog(DateTime startDate, int duration)
         {
             var endDate = startDate.AddMinutes(duration);
-            var items = _log.Where(x => x.CreatedAt >= startDate && x.CreatedAt <= endDate).ToList();
+            var items = _log.Where(item => item.CreatedAt >= startDate && item.CreatedAt <= endDate).ToList();
 
             return new AggregatedSensorSample(startDate, items);
         }

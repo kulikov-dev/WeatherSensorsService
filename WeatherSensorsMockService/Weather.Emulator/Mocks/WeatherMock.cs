@@ -1,5 +1,4 @@
 ﻿using System;
-using Weather.Data;
 
 namespace Weather.Emulator.Mocks
 {

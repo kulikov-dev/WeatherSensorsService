@@ -105,10 +105,10 @@ namespace Weather.Client.HostedServices
         {
             const int streamTimeOut = 50;
             var client = await GetClient();
-            var eventResponseStream = client.EventStream(new Empty(), cancellationToken: this.cancellationToken);
+            var eventResponseStream = client.EventStream(new Empty(), cancellationToken: cancellationToken);
             var serviceCancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(streamTimeOut));
 
-            while (await eventResponseStream.ResponseStream.MoveNext(this.cancellationToken))
+            while (await eventResponseStream.ResponseStream.MoveNext(cancellationToken))
             {
                 var responseItem = eventResponseStream.ResponseStream.Current;
 
@@ -118,11 +118,11 @@ namespace Weather.Client.HostedServices
                     {
                         CreatedAt = responseItem.CreatedAt.ToDateTime(),
                         EventId = responseItem.EventId,
-                        SensorInfo = new Data.SensorInfo()
+                        SensorInfo = new SensorInfo()
                         {
                             Id = responseItem.SensorInfo.Id,
                             Name = responseItem.SensorInfo.Name,
-                            SensorType = (Data.SensorTypeEnum)(int)responseItem.SensorInfo.SensorType,
+                            SensorType = (SensorTypeEnum)(int)responseItem.SensorInfo.SensorType,
                             CO2 = responseItem.Co2,
                             Humidity = responseItem.Humidity,
                             Temperature = responseItem.Temperature,

@@ -111,7 +111,11 @@ namespace Weather.Client.Controllers
                 return NotFound(sensorId);
             }
 
-            _subscriptions.Unsubscribe(sensorId);
+            await Task.Factory.StartNew(() =>
+            {
+                _subscriptions.Unsubscribe(sensorId);
+            });
+
             return Ok();
         }
 
@@ -123,7 +127,11 @@ namespace Weather.Client.Controllers
         [HttpGet("unsubscribe")]
         public async Task<ActionResult> UnsubscribeAll()
         {
-            _subscriptions.UnsubscribeAll();
+            await Task.Factory.StartNew(() =>
+            {
+                _subscriptions.UnsubscribeAll();
+            });
+
             return Ok();
         }
 
@@ -135,7 +143,12 @@ namespace Weather.Client.Controllers
         [HttpGet("log")]
         public async Task<ActionResult<SensorSample>> GetFullLog()
         {
-            return Ok(_storage.GetFullLog());
+            var result = await Task.Factory.StartNew(() =>
+            {
+                return _storage.GetFullLog();
+            });
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -147,7 +160,12 @@ namespace Weather.Client.Controllers
         [HttpGet("log/{sensorId:long}")]
         public async Task<ActionResult<SensorSample>> GetFullLogBySensor(long sensorId)
         {
-            return Ok(_storage.GetFullLogBySensor(sensorId));
+            var result = await Task.Factory.StartNew(() =>
+            {
+                return _storage.GetFullLogBySensor(sensorId);
+            });
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -159,7 +177,12 @@ namespace Weather.Client.Controllers
         [HttpGet("average/{sensorId:long}")]
         public async Task<ActionResult<AggregatedSensorSample>> GetAggregatedData(long sensorId)
         {
-            return Ok(_storage.GetAverageLogBySensor(sensorId));
+            var result = await Task.Factory.StartNew(() =>
+            {
+                return _storage.GetAggregatedLogBySensor(sensorId);
+            });
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -179,8 +202,12 @@ namespace Weather.Client.Controllers
             }
 
             date = new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0);
+            var result = await Task.Factory.StartNew(() =>
+            {
+                return _storage.GetAggregatedLogBySensor(sensorId, date, duration);
+            });
 
-            return Ok(_storage.GetAverageLogBySensor(sensorId, date, duration));
+            return Ok(result);
         }
     }
 }

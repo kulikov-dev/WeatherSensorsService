@@ -7,7 +7,7 @@ using Weather.Client.Options;
 namespace Weather.Client.Helpers
 {
     /// <summary>
-    /// Extensions for service setup
+    /// Extensions for services setup
     /// </summary>
     public static class ServiceCollectionExtensions
     {
@@ -20,7 +20,7 @@ namespace Weather.Client.Helpers
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddLocalGrpcClient<Weather.Emulator.Generator.GeneratorClient, WeatherGrpcConfig>(configuration);
+            services.AddLocalGrpcClient<Emulator.Generator.GeneratorClient, WeatherGrpcConfig>(configuration);
         }
 
         /// <summary>

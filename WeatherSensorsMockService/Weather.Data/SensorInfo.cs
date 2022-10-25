@@ -3,7 +3,7 @@
     /// <summary>
     /// Sensor info
     /// </summary>
-    public class SensorInfo
+    public sealed class SensorInfo
     {
         /// <summary>
         /// Identifier
@@ -11,7 +11,7 @@
         public long Id { get; set; }
 
         /// <summary>
-        /// Name
+        /// Sensor name
         /// </summary>
         public string Name { get; set; }
 

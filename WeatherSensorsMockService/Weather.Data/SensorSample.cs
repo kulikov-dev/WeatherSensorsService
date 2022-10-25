@@ -13,7 +13,7 @@ namespace Weather.Data
         public long EventId { get; set; }
 
         /// <summary>
-        /// Sensor info
+        /// Sensor info and current measures
         /// </summary>
         public SensorInfo SensorInfo { get; set; }
 

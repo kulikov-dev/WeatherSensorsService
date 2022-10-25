@@ -8,26 +8,22 @@ namespace Weather.Data
     /// <summary>
     /// Sensors data storage
     /// </summary>
-    public class SensorsStorage : ISensorsStorage
+    public sealed class SensorsStorage : ISensorsStorage
     {
         /// <summary>
-        /// Sensor data
+        /// Sensors data
         /// </summary>
         /// <remarks> Key - identifier, value - samples </remarks>
         private readonly ConcurrentDictionary<long, SensorLog> _log = new();
 
-        /// <summary>
-        /// Add new sample
-        /// </summary>
-        /// <param name="info"> Sample info </param>
-        /// <param name="aggregationDuration"> Aggregation duration </param>
+        /// <inheritdoc/>
         public void AddSample(SensorSample @info, int aggregationDuration)
         {
             _log.AddOrUpdate(@info.SensorInfo.Id, new SensorLog(@info), (k, l) => { l.AddSample(@info, aggregationDuration); return l; });
         }
 
         /// <inheritdoc/>
-        public List<AggregatedSensorSample> GetAverageLogBySensor(long sensorId)
+        public List<AggregatedSensorSample> GetAggregatedLogBySensor(long sensorId)
         {
             if (_log.ContainsKey(sensorId))
             {
@@ -55,7 +51,7 @@ namespace Weather.Data
         }
 
         /// <inheritdoc/>
-        public AggregatedSensorSample GetAverageLogBySensor(long sensorId, DateTime startDate, int duration)
+        public AggregatedSensorSample GetAggregatedLogBySensor(long sensorId, DateTime startDate, int duration)
         {
             if (_log.ContainsKey(sensorId))
             {

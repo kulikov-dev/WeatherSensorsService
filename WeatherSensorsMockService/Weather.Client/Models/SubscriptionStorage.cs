@@ -5,7 +5,7 @@ namespace Weather.Client.Models
     /// <summary>
     /// Storage of subscriptions to sensors
     /// </summary>
-    public class SubscriptionStorage : ISubscriptionStorage
+    public sealed class SubscriptionStorage : ISubscriptionStorage
     {
         /// <summary>
         /// List of subscribed sensor's identifiers

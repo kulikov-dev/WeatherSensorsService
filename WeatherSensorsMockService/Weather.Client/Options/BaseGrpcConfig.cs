@@ -29,7 +29,7 @@ namespace Weather.Client.Options
         /// <exception cref="ArgumentNullException"> Not initialized GRPC config </exception>
         public virtual string GetSectionPath()
         {
-            throw new ArgumentNullException("You have to initialize GRPC config");
+            throw new ArgumentNullException("You have to initialize config first.");
         }
     }
 }
